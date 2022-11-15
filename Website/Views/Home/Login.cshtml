@@ -1,0 +1,10 @@
+﻿@{
+    
+}
+
+<div class="text-center">
+    <h1 class="display-4">Login</h1>
+</div>
+<div>
+    @(await Html.RenderComponentAsync<Website.Views.Shared.Component.Component>(RenderMode.ServerPrerendered, new { Data = " Hello World " }))
+</div>

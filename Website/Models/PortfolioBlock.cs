@@ -1,8 +1,10 @@
-﻿namespace Website.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Website.Models
 {
     public class PortfolioBlock
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string ShowcaseIcon { get; set; }
         public string LongDescription { get; set; }

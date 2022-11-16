@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Website.Models;
 using Website.Services;
 
 namespace Website.Controllers
@@ -16,7 +17,8 @@ namespace Website.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            return View("mainpage");
+            //portfolioService.CreateNewPortfolioBlockTemplate("Testing Title2", "Icon", "LongDesc", "Adressweb");
+            return View("mainpage", portfolioService.GetPortfolio());
         }
 
         [Route("login")]

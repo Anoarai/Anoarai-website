@@ -1,14 +1,33 @@
 ﻿using Website.DatabaseContext;
+using Website.Models;
 
 namespace Website.Services
 {
-    public class PortfolioBlockService
+    public class PortfolioBlockService : IPortfolioBlockService
     {
-        private AppDbContext database;
+        private IDatabaseContext database;
 
-        public PortfolioBlockService(AppDbContext database)
+        public PortfolioBlockService(IDatabaseContext database)
         {
             this.database = database;
         }
+
+        public void CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress)
+        {
+            database.portfolioBlocks.Add(new PortfolioBlock(title, showcaseIcon, longDescription, webAddress));
+            database.SaveChanges();
+        }
+
+        public List<PortfolioBlock> GetPortfolio()
+        {
+            return database.portfolioBlocks.Select(pb => pb).ToList();
+        }
+    }
+
+
+    public interface IPortfolioBlockService
+    {
+        void CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress);
+        List<PortfolioBlock> GetPortfolio();
     }
 }

@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using System.Text;
 using System;
 using Website.DatabaseContext;
+using Website.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,7 +41,7 @@ void ConfigureServices(IServiceCollection services)
     var config = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
     var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Database=PersonalWebsite;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
     services.AddDbContext<AppDbContext>(b => b.UseSqlServer(connectionString));
-    //services.AddScoped<ITokenService, TokenService>();
+    services.AddScoped<IPortfolioBlockService, PortfolioBlockService>();
     //services.AddScoped<IUserService, UserService>();
     //services.AddScoped<ISongService, SongService>();
     //services.AddScoped<ISearchService, SearchService>();

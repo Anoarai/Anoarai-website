@@ -2,12 +2,9 @@
 
 <h1>Anoarai</h1>
 
+
 <div>
     @{
-        @foreach(PortfolioBlock block in Model)
-        {
-            @(await Html.RenderComponentAsync<Website.Views.Shared.Component.PortfolioBlockTemplate>(RenderMode.ServerPrerendered, new { data = block }))
-        }
+        @(await Html.RenderComponentAsync<Website.Views.Shared.Component.MainPage>(RenderMode.ServerPrerendered))
     }
-    
 </div>

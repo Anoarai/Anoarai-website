@@ -1,0 +1,46 @@
+﻿@inject IPortfolioBlockService PortfolioBlockService;
+
+<h3>AddNewPortfolioBlock</h3>
+
+<button @onclick="ShowNewPortfolioForm">+ Add New Portfolio</button>
+
+@if (dynamicToggle is not null)
+{
+    <div>
+        <DynamicComponent Type="@dynamicToggle" />
+    </div>
+}
+@if (message != string.Empty)
+{
+    @message
+}
+
+
+@code {
+    private Type? dynamicToggle;
+    private string message = string.Empty;
+    public EventCallback<bool> ShouldRefresh { get; set; }
+
+    void ShowNewPortfolioForm()
+    {
+        var value = nameof(NewPortfolioForm);
+        dynamicToggle = Type.GetType($"Website.Views.Shared.Component.{value}");
+    }
+
+    protected void OnPortfolioAdded(string message)
+    {
+        dynamicToggle = null;
+        this.message = message;
+        Refresh();
+    }
+    protected void OnPortfolioAddedFailed(string message)
+    {
+        this.message = message;
+    }
+
+    protected async Task Refresh()
+    {
+        await ShouldRefresh.InvokeAsync(true);
+    }
+
+}

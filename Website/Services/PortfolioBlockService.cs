@@ -12,10 +12,15 @@ namespace Website.Services
             this.database = database;
         }
 
-        public void CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress)
+        public bool CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress)
         {
+            if(database.portfolioBlocks.Any(pb=>pb.Title == title))
+            {
+                return false;
+            }
             database.portfolioBlocks.Add(new PortfolioBlock(title, showcaseIcon, longDescription, webAddress));
             database.SaveChanges();
+            return true;
         }
 
         public List<PortfolioBlock> GetPortfolio()
@@ -27,7 +32,7 @@ namespace Website.Services
 
     public interface IPortfolioBlockService
     {
-        void CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress);
+        bool CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress);
         List<PortfolioBlock> GetPortfolio();
     }
 }

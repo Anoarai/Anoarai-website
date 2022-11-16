@@ -1,0 +1,57 @@
+﻿@inject IPortfolioBlockService PortfolioBlockService;
+
+
+<div>
+    <EditForm Model="@FormModel" OnValidSubmit="@PortfolioCreated">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <p>
+            <label>
+                Title:
+                <InputText @bind-Value="FormModel.Title" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Icon:
+                <InputText @bind-Value="FormModel.ShowcaseIcon" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Long Description:
+                <InputText @bind-Value="FormModel.LongDescription" />
+            </label>
+        </p>
+        <p>
+            <label>
+                Web Adress:
+                <InputText @bind-Value="FormModel.WebAddress" />
+            </label>
+        </p>
+        <button type="submit">Submit</button>
+    </EditForm>
+</div>
+
+
+@code {
+    private ComponentPortfolioBlock FormModel = new();
+    private string response = string.Empty;
+    public EventCallback<string> OnPortfolioAdded { get; set; }
+    public EventCallback<string> OnPortfolioAddedFailed{ get; set; }
+
+    protected async Task PortfolioCreated()
+    {
+        var portfolioCreated = PortfolioBlockService.CreateNewPortfolioBlockTemplate(FormModel.Title, FormModel.ShowcaseIcon, FormModel.LongDescription, FormModel.WebAddress);
+        if (!portfolioCreated)
+        {
+            response = "Already added portfolio with this title";
+            await OnPortfolioAddedFailed.InvokeAsync(response);
+        }
+        else
+        {
+            response = "Portfolio succesfully added";
+            await OnPortfolioAdded.InvokeAsync(response);
+        }
+    }
+}

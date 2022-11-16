@@ -1,0 +1,26 @@
+﻿@inject IPortfolioBlockService portfolioBlockService
+@inject NavigationManager navigationManager
+
+<h1>Anoarai</h1>
+
+<AddNewPortfolioBlock />
+
+@foreach (var block in portfolioBlockService.GetPortfolio())
+{
+    <PortfolioBlockTemplate Data="block" />
+}
+
+
+
+@code {
+    private bool Refreshable = false;
+
+    protected void ShouldRefresh(bool refresh)
+    {
+        Refreshable = true;
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+}

@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Website.Services;
 
 namespace Website.Controllers
 {
     [Route("")]
     public class HomeController : Controller
     {
+        private IPortfolioBlockService portfolioService;
 
-        public HomeController()
+        public HomeController(IPortfolioBlockService portfolioServiceInput)
         {
-
+            portfolioService = portfolioServiceInput;
         }
 
         [Route("")]
         public IActionResult Index()
         {
-            return View();
+            return View("mainpage");
         }
 
         [Route("login")]

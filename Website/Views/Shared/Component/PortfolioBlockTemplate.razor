@@ -1,0 +1,49 @@
+﻿
+<div>
+<h3>@Title</h3>
+<img src="@ShowcaseIcon"/>
+@LongDescription
+
+<a href="@WebAddress">@Title</a>
+</div>
+
+
+@code {
+    [Parameter]
+    public PortfolioBlock Data { get; set; }
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public string ShowcaseIcon { get; set; } = string.Empty;
+
+    [Parameter]
+    public string LongDescription { get; set; } = string.Empty;
+
+    [Parameter]
+    public string WebAddress { get; set; } = string.Empty;
+
+    protected override async void OnInitialized()
+    {
+        Title = Data.Title;
+        ShowcaseIcon = Data.ShowcaseIcon;
+        LongDescription = Data.LongDescription;
+        WebAddress = Data.WebAddress;
+    }
+}
+
+
+@*
+<h3>Blazor Component in MVC</h3>
+<button @onclick="Test" class="btn btn-dark">Click to get answer</button>
+<br />
+<div>@Data </div>
+@code {
+    [Parameter]
+    public string Data { get; set; } = string.Empty;
+    private void Test()
+    {
+        Data = "Button Clicked";
+    }
+*@   

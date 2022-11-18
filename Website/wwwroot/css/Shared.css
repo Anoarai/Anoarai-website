@@ -1,0 +1,75 @@
+
+/*RedwingCus*/
+@font-face {
+    font-family: 'RedwingCus';
+    src: url('../../fonts/redwing-light.otf') format('opentype');
+}
+
+/*AmstrongCus*/
+@font-face {
+    font-family: 'AmstrongCus';
+    src: url('../../fonts/AMSTRONG.otf') format('opentype');
+}
+
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+nav, footer {
+    background: rgb(2,81,131);
+    background: radial-gradient(circle, rgba(2,81,131,1) 0%, rgba(74,16,117,1) 46%);
+}
+
+.container-fluid {
+    box-sizing: border-box;
+    border: 0.3em;
+    border-color: #8e3a07;
+    width: 100%;
+    border-style: double;
+}
+
+.navbar-brand {
+    font-family: AmstrongCus;
+    font-size: 2em;
+    font-style: italic;
+    color: white;
+}
+
+.nav-link {
+    font-family: AmstrongCus;
+    font-size: 1.5em;
+    font-style: italic;
+    color: white;
+}
+
+body {
+    font-family: RedwingCus;
+    background: rgb(47,1,80);
+    background: radial-gradient(rgba(47,1,80,1) 0%, rgba(110,24,164,1) 85%, rgba(144,18,123,1) 100%);
+}
+
+
+h1 {
+    font-family: AmstrongCus;
+    font-size: 6em;
+    font-style: italic;
+    font-weight: normal;
+    text-align: center;
+    color: white;
+}
+
+.PortfolioBlockSection {
+    display: -webkit-box;
+    overflow-x: scroll;
+    margin: 1em;
+}::-webkit-scrollbar {
+    display: none;
+}
+
+.PortfolioBlockTemplate {
+    height: 500px;
+    width: 500px;
+    margin: 0.5em;
+}

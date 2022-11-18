@@ -17,7 +17,6 @@ namespace Website.Controllers
         [Route("")]
         public IActionResult Index()
         {
-            //portfolioService.CreateNewPortfolioBlockTemplate("Testing Title2", "Icon", "LongDesc", "Adressweb");
             return View("mainpage", portfolioService.GetPortfolio());
         }
 

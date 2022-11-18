@@ -14,18 +14,18 @@ namespace Website.Services
 
         public bool CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress)
         {
-            if(database.portfolioBlocks.Any(pb=>pb.Title == title))
+            if(database.PortfolioBlocks.Any(pb=>pb.Title == title))
             {
                 return false;
             }
-            database.portfolioBlocks.Add(new PortfolioBlock(title, showcaseIcon, longDescription, webAddress));
+            database.PortfolioBlocks.Add(new PortfolioBlock(title, showcaseIcon, longDescription, webAddress));
             database.SaveChanges();
             return true;
         }
 
         public List<PortfolioBlock> GetPortfolio()
         {
-            return database.portfolioBlocks.Select(pb => pb).ToList();
+            return database.PortfolioBlocks.Select(pb => pb).ToList();
         }
     }
 

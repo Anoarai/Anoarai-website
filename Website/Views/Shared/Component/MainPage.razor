@@ -3,21 +3,21 @@
 
 <h1>Anoarai</h1>
 
-<AddNewPortfolioBlock />
+<AddNewPortfolioBlock ShouldRefresh="IsChangedForRefresh" />
 
-@foreach (var block in portfolioBlockService.GetPortfolio())
-{
-    <PortfolioBlockTemplate Data="block" />
-}
-
+<div class="PortfolioBlockSection">
+    <Virtualize Items=@portfolioBlockService.GetPortfolio() Context="block">
+        <PortfolioBlockTemplate Data="block" />
+    </Virtualize>
+</div>
 
 
 @code {
-    private bool Refreshable = false;
+    private bool ShouldRefresh = false;
 
-    protected void ShouldRefresh(bool refresh)
+    protected void IsChangedForRefresh(bool refresh)
     {
-        Refreshable = true;
+        ShouldRefresh = true;
         InvokeAsync(() =>
         {
             StateHasChanged();

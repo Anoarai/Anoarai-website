@@ -4,12 +4,13 @@
 
 <button @onclick="ShowNewPortfolioForm">+ Add New Portfolio</button>
 
-@if (dynamicToggle is not null)
+@if (toggle)
 {
     <div>
-        <DynamicComponent Type="@dynamicToggle" />
+        <NewPortfolioForm OnPortfolioResult="PortfolioResultResponse" />
     </div>
 }
+<br />
 @if (message != string.Empty)
 {
     @message
@@ -17,25 +18,30 @@
 
 
 @code {
-    private Type? dynamicToggle;
+    private bool toggle;
     private string message = string.Empty;
+    [Parameter]
     public EventCallback<bool> ShouldRefresh { get; set; }
 
     void ShowNewPortfolioForm()
     {
-        var value = nameof(NewPortfolioForm);
-        dynamicToggle = Type.GetType($"Website.Views.Shared.Component.{value}");
+        toggle = true;
+        message = string.Empty;
+        var value = nameof(NewPortfolioForm);   
     }
 
-    protected void OnPortfolioAdded(string message)
+    protected async void PortfolioResultResponse(string message)
     {
-        dynamicToggle = null;
-        this.message = message;
-        Refresh();
-    }
-    protected void OnPortfolioAddedFailed(string message)
-    {
-        this.message = message;
+        if (message.Contains("successfully"))
+        {
+            toggle = false;
+            this.message = message;
+            await Refresh();
+        }
+        else
+        {
+            this.message = message;
+        }
     }
 
     protected async Task Refresh()

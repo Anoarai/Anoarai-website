@@ -37,8 +37,8 @@
 @code {
     private ComponentPortfolioBlock FormModel = new();
     private string response = string.Empty;
-    public EventCallback<string> OnPortfolioAdded { get; set; }
-    public EventCallback<string> OnPortfolioAddedFailed{ get; set; }
+    [Parameter]
+    public EventCallback<string> OnPortfolioResult{ get; set; }
 
     protected async Task PortfolioCreated()
     {
@@ -46,12 +46,12 @@
         if (!portfolioCreated)
         {
             response = "Already added portfolio with this title";
-            await OnPortfolioAddedFailed.InvokeAsync(response);
+            await OnPortfolioResult.InvokeAsync(response);
         }
         else
         {
-            response = "Portfolio succesfully added";
-            await OnPortfolioAdded.InvokeAsync(response);
+            response = "Portfolio successfully added";
+            await OnPortfolioResult.InvokeAsync(response);
         }
     }
 }

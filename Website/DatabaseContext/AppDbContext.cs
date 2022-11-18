@@ -5,7 +5,8 @@ namespace Website.DatabaseContext
 {
     public class AppDbContext : DbContext, IDatabaseContext
     {
-        public DbSet<PortfolioBlock> portfolioBlocks { get; set; }
+        public DbSet<PortfolioBlock> PortfolioBlocks { get; set; }
+        public DbSet<Song> Songs { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }

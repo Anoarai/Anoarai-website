@@ -1,10 +1,10 @@
 ﻿
-<div>
-<h3>@Title</h3>
-<img src="@ShowcaseIcon"/>
-@LongDescription
-
-<a href="@WebAddress">@Title</a>
+<div class="PortfolioBlockTemplate" style="background-image:url('@ShowcaseIcon')">
+    <h3>@Title</h3>
+    <br />
+    @LongDescription
+    <br />
+    <button href="@WebAddress" class="Address.Button">Visit</button>
 </div>
 
 
@@ -32,18 +32,3 @@
         WebAddress = Data.WebAddress;
     }
 }
-
-
-@*
-<h3>Blazor Component in MVC</h3>
-<button @onclick="Test" class="btn btn-dark">Click to get answer</button>
-<br />
-<div>@Data </div>
-@code {
-    [Parameter]
-    public string Data { get; set; } = string.Empty;
-    private void Test()
-    {
-        Data = "Button Clicked";
-    }
-*@   

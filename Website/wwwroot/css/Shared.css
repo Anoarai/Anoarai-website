@@ -48,6 +48,7 @@ body {
     font-family: RedwingCus;
     background: rgb(47,1,80);
     background: radial-gradient(rgba(47,1,80,1) 0%, rgba(110,24,164,1) 85%, rgba(144,18,123,1) 100%);
+    color: white;
 }
 
 
@@ -72,4 +73,8 @@ h1 {
     height: 500px;
     width: 500px;
     margin: 0.5em;
+}
+
+.PortfolioForm{
+    
 }

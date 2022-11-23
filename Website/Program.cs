@@ -42,8 +42,8 @@ void ConfigureServices(IServiceCollection services)
     var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Database=PersonalWebsite;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
     services.AddDbContext<AppDbContext>(b => b.UseSqlServer(connectionString));
     services.AddScoped<IPortfolioBlockService, PortfolioBlockService>();
+    services.AddScoped<ISongService, SongService>();
     //services.AddScoped<IUserService, UserService>();
-    //services.AddScoped<ISongService, SongService>();
     //services.AddScoped<ISearchService, SearchService>();
     //services.AddScoped<IPlaylistService, PlaylistService>();
     services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

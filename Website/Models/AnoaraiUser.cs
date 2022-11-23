@@ -2,9 +2,9 @@ using System.Security.Cryptography;
 
 namespace Website.Models
 {
-    public class User
+    public class AnoaraiUser
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Username { get; set; }
         private string _password;
         public string Password
@@ -12,18 +12,20 @@ namespace Website.Models
             get => _password;
             set { _password = HashPassword(value); }
         }
-        public string Email { get; set; }
+        public string PublicEmail { get; set; }
+        public string PrivateEmail { get; set; }
         public byte[] PasswordSalt { get; set; }
 
-        internal User()
+        internal AnoaraiUser()
         { }
 
-        public User(string username, string password, string email)
+        public AnoaraiUser(string username, string password, string publicEmail, string privateEmail)
         {
             Username = username;
             PasswordSalt = RandomNumberGenerator.GetBytes(16);
             Password = password;
-            Email = email;
+            PublicEmail = publicEmail;
+            PrivateEmail = privateEmail;
         }
 
         private string HashPassword(string passwordInput)

@@ -7,6 +7,7 @@ namespace Website.DatabaseContext
     {
         public DbSet<PortfolioBlock> PortfolioBlocks { get; set; }
         public DbSet<Song> Songs { get; set; }
+        public DbSet<AnoaraiUser> Users { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
@@ -24,10 +25,16 @@ namespace Website.DatabaseContext
             modelBuilder.Entity<Song>().HasKey(s=>s.Id);
             modelBuilder.Entity<Song>().HasIndex(s=>s.Name).IsUnique();
             modelBuilder.Entity<Song>().HasIndex(s=>s.DownloadLink).IsUnique();
-            modelBuilder.Entity<Song>().HasIndex(s=>s.YoutubeLink).IsUnique();  
+            modelBuilder.Entity<Song>().HasIndex(s=>s.YoutubeLink).IsUnique();
+
+            modelBuilder.Entity<AnoaraiUser>().HasKey(u => u.Id);
+            modelBuilder.Entity<AnoaraiUser>().HasIndex(u=>u.Username).IsUnique();
+
+            modelBuilder.Entity<Artist>().HasKey(a => a.Id);
+            modelBuilder.Entity<Artist>().HasIndex(a=>a.Name).IsUnique();
 
             //Relantionships
-            //modelBuilder.Entity<User>().HasMany(u => u.Playlists).WithOne(pl => pl.Owner);
+            modelBuilder.Entity<Song>().HasMany(u => u.RelatedArtists).WithMany(a => a.Songs);
         }
     }
 }

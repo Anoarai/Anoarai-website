@@ -1,4 +1,5 @@
 ﻿@inject IPortfolioBlockService portfolioBlockService
+@inject ISongService songService
 @inject NavigationManager navigationManager
 
 <h1>Anoarai</h1>
@@ -8,6 +9,12 @@
 <div class="PortfolioBlockSection">
     <Virtualize Items=@portfolioBlockService.GetPortfolio() Context="block">
         <PortfolioBlockTemplate Data="block" />
+    </Virtualize>
+</div>
+
+<div class="SongBlockTemplateSection">
+    <Virtualize Items=@songService.GetSongs() Context="Song">
+        <SongTemplateMainPage Data="Song" />
     </Virtualize>
 </div>
 

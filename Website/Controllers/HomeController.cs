@@ -15,9 +15,9 @@ namespace Website.Controllers
         }
 
         [Route("")]
-        public IActionResult Index()
+        public IActionResult MainPage()
         {
-            return View("mainpage", portfolioService.GetPortfolio());
+            return View("mainpage");
         }
 
         [Route("login")]

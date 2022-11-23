@@ -7,6 +7,7 @@ namespace Website.DatabaseContext
     {
         public DbSet<PortfolioBlock> PortfolioBlocks { get; set; }
         public DbSet<Song> Songs { get; set; }
+        public DbSet<AnoaraiUser> Users { get; set; }
 
         IQueryable<T> Set<T>() where T : class;
 

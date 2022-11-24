@@ -1,4 +1,7 @@
-﻿using Website.DatabaseContext;
+﻿using Microsoft.AspNetCore.Components.Forms;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using Website.DatabaseContext;
 using Website.Models;
 
 namespace Website.Services
@@ -12,12 +15,17 @@ namespace Website.Services
             this.database = database;
         }
 
-        public bool CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress)
+        public bool CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, IBrowserFile icon, string longDescription, string webAddress)
         {
             if(database.PortfolioBlocks.Any(pb=>pb.Title == title))
             {
                 return false;
             }
+
+            using var image = Image.Load(icon.OpenReadStream());
+            image.Mutate(x => x.Resize(256, 256));
+            image.Save(showcaseIcon);
+
             database.PortfolioBlocks.Add(new PortfolioBlock(title, showcaseIcon, longDescription, webAddress));
             database.SaveChanges();
             return true;
@@ -32,7 +40,7 @@ namespace Website.Services
 
     public interface IPortfolioBlockService
     {
-        bool CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, string longDescription, string webAddress);
+        bool CreateNewPortfolioBlockTemplate(string title, string showcaseIcon, IBrowserFile icon, string longDescription, string webAddress);
         List<PortfolioBlock> GetPortfolio();
     }
 }

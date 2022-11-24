@@ -2,7 +2,7 @@
 
 
 <div class="PortfolioForm">
-    <EditForm Model="@FormModel" OnValidSubmit="@PortfolioCreated">
+    <EditForm Model="@FormModel" OnValidSubmit="@PortfolioCreated" enctype="multipart/form-data">
         <DataAnnotationsValidator />
         <ValidationSummary />
         <p>
@@ -15,6 +15,7 @@
             <label>
                 Icon:
                 <InputText @bind-Value="FormModel.ShowcaseIcon" />
+                <InputFile OnChange="@OnInputFileChange" accept=".png, .jpg, .jpeg" />
             </label>
         </p>
         <p>
@@ -37,12 +38,23 @@
 @code {
     private ComponentPortfolioBlock FormModel = new();
     private string response = string.Empty;
+    IBrowserFile selectedFile;
     [Parameter]
-    public EventCallback<string> OnPortfolioResult{ get; set; }
+    public EventCallback<string> OnPortfolioResult { get; set; }
+
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+    }
 
     protected async Task PortfolioCreated()
     {
-        var portfolioCreated = PortfolioBlockService.CreateNewPortfolioBlockTemplate(FormModel.Title, FormModel.ShowcaseIcon, FormModel.LongDescription, FormModel.WebAddress);
+        var portfolioCreated = PortfolioBlockService
+        .CreateNewPortfolioBlockTemplate(FormModel.Title,
+                                        "wwwroot/Icons/Portfolio/" + FormModel.ShowcaseIcon + selectedFile.Name.StartsWith('.'),
+                                        selectedFile,
+                                        FormModel.LongDescription,
+                                        FormModel.WebAddress);
         if (!portfolioCreated)
         {
             response = "Already added portfolio with this title";

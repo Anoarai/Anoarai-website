@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Website.Models
 {
@@ -13,7 +14,7 @@ namespace Website.Models
         private PortfolioBlock()
         {}
 
-        public PortfolioBlock(string title, string showcaseIcon, string longDescription, string webAddress)
+        public PortfolioBlock(string title, string showcaseIcon,string longDescription, string webAddress)
         {
             Title = title;
             ShowcaseIcon = showcaseIcon;

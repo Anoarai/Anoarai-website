@@ -11,24 +11,24 @@ namespace Website.Services
             this.database = database;
         }
 
-        public bool AddNewSong(string name, string lyrics, string downloadLink, string youtubeLink)
+        public bool AddNewSong(string name, string lyrics, string downloadLink, string youtubeLink, string backgroundIcon)
         {
             if (database.Songs.Any(s => s.Name == name) || database.Songs.Any(s=>s.DownloadLink == downloadLink) || database.Songs.Any(s=>s.YoutubeLink == youtubeLink))
             {
                 return false;
             }
-            database.Songs.Add(new Song(name, lyrics, downloadLink, youtubeLink));
+            database.Songs.Add(new Song(name, lyrics, downloadLink, youtubeLink, backgroundIcon));
             database.SaveChanges();
             return true;
         }
 
-        public bool AddNewSongWithArtists(string name, string lyrics, string downloadLink, string youtubeLink, params string[] artists)
+        public bool AddNewSongWithArtists(string name, string lyrics, string downloadLink, string youtubeLink, string backgroundIcon, params string[] artists)
         {
             if (database.Songs.Any(s => s.Name == name) || database.Songs.Any(s => s.DownloadLink == downloadLink) || database.Songs.Any(s => s.YoutubeLink == youtubeLink))
             {
                 return false;
             }
-            database.Songs.Add(new Song(name, lyrics, downloadLink, youtubeLink, artists));
+            database.Songs.Add(new Song(name, lyrics, downloadLink, youtubeLink, backgroundIcon, artists));
             database.SaveChanges();
             return true;
         }
@@ -41,8 +41,8 @@ namespace Website.Services
 
     public interface ISongService
     {
-        public bool AddNewSong(string name, string lyrics, string downloadLink, string youtubeLink);
-        public bool AddNewSongWithArtists(string name, string lyrics, string downloadLink, string youtubeLink, params string[] artists);
+        public bool AddNewSong(string name, string lyrics, string downloadLink, string youtubeLink, string backgroundIcon);
+        public bool AddNewSongWithArtists(string name, string lyrics, string downloadLink, string youtubeLink, string backgroundIcon, params string[] artists);
         public List<Song> GetSongs();
     }
 }

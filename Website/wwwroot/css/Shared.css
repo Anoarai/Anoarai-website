@@ -70,11 +70,21 @@ h1 {
 }
 
 .PortfolioBlockTemplate {
-    height: 500px;
-    width: 500px;
+    height: 15em;
+    width: 22em;
     margin: 0.5em;
 }
 
-.PortfolioForm{
-    
+SongBlockTemplateSection {
+    display: -webkit-box;
+    overflow-x: scroll;
+    margin: 1em;
+}::-webkit-scrollbar {
+    display: none;
+}
+
+.SongBlockTemplate {
+    height: 10em;
+    width: 18em;
+    margin: 0.5em;
 }

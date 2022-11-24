@@ -21,6 +21,21 @@ namespace Website.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ArtistSong", b =>
+                {
+                    b.Property<int>("RelatedArtistsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SongsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RelatedArtistsId", "SongsId");
+
+                    b.HasIndex("SongsId");
+
+                    b.ToTable("ArtistSong");
+                });
+
             modelBuilder.Entity("Website.Models.AnoaraiUser", b =>
                 {
                     b.Property<int>("Id")
@@ -55,6 +70,30 @@ namespace Website.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Website.Models.Artist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Artist");
                 });
 
             modelBuilder.Entity("Website.Models.PortfolioBlock", b =>
@@ -97,6 +136,10 @@ namespace Website.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("BackgroundIcon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DownloadLink")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -125,6 +168,21 @@ namespace Website.Migrations
                         .IsUnique();
 
                     b.ToTable("Songs");
+                });
+
+            modelBuilder.Entity("ArtistSong", b =>
+                {
+                    b.HasOne("Website.Models.Artist", null)
+                        .WithMany()
+                        .HasForeignKey("RelatedArtistsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Website.Models.Song", null)
+                        .WithMany()
+                        .HasForeignKey("SongsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

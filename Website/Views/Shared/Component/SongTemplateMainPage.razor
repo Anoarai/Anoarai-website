@@ -1,5 +1,5 @@
 ﻿
-<div>
+<div class="SongBlockTemplate" style="background-image:url('@BackgroundIcon')">
     <h2>@Name</h2>
     <p>@Artists</p>
     <p>
@@ -13,6 +13,7 @@
     public Song Data { get; set; }
     public string Name { get; set; } = string.Empty;
     public string Lyrics { get; set; } = string.Empty;
+    public string BackgroundIcon { get; set; } = string.Empty;
     public string DownloadLink { get; set; } = string.Empty;
     public string YoutubeLink { get; set; } = string.Empty;
     public string Artists { get; set; } = string.Empty;
@@ -24,6 +25,7 @@
         Lyrics = Data.Lyrics;
         DownloadLink = Data.DownloadLink;
         YoutubeLink = Data.YoutubeLink;
+        BackgroundIcon = Data.BackgroundIcon;
         var NameOfArtists = new List<string>();
         foreach (var artist in Data.RelatedArtists)
         {
